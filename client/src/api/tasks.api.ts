@@ -18,7 +18,11 @@ export const getTasksRequest = async () => {
 };
 
 
-
 export const cretateTaskRequest = async (task: Task) => {
  await axios.post(`http://localhost:${PORT}/tasks`, task);  
+};
+
+
+export const deleteTaskRequest = async (id: number) => {
+  await axios.delete(`http://localhost:${PORT}/tasks/${id}`);
 };
