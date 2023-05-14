@@ -5,6 +5,7 @@ import { NotFound, TasksForm, TasksPages } from '../pages';
 
 export const AppRouter: React.FC = () => {
 
+    
   return (
     <Routes>
       <Route path={switchRoutes.root} element={<TasksPages />} />
