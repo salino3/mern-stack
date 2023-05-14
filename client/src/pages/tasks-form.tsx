@@ -1,5 +1,6 @@
-import React from 'react';
-import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
+import React from "react";
+import { Form, Formik } from "formik";
+import { cretateTaskRequest } from "../api/tasks.api";
 
 export const TasksForm: React.FC = () => {
   return (
@@ -9,11 +10,17 @@ export const TasksForm: React.FC = () => {
           title: "",
           description: "",
         }}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={async (values, actions) => {
+          try {
+            const response = await cretateTaskRequest(values);
+            console.log(values);
+            actions.resetForm();
+          } catch (error) {
+            console.error(error);
+          }
         }}
       >
-        {({ handleChange, handleSubmit }) => (
+        {({ handleChange, handleSubmit, values, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <label htmlFor="title">Title</label>
             <input
@@ -21,6 +28,8 @@ export const TasksForm: React.FC = () => {
               placeholder="Text a title"
               type="text"
               name="title"
+              value={values.title}
+              required
             />{" "}
             <label htmlFor="description">Description</label>
             <textarea
@@ -28,11 +37,14 @@ export const TasksForm: React.FC = () => {
               placeholder="Text a Description"
               rows={3}
               name="description"
+              value={values.description}
             ></textarea>
-            <button type="submit">Save</button>
+            <button 
+            disabled={isSubmitting}
+            type="submit">{isSubmitting ? "Saving.." : "Save"}</button>
           </Form>
         )}
       </Formik>
     </div>
   );
-}
+};
