@@ -1,7 +1,6 @@
 import {pool} from '../db.js';
 
 
-
 export const getTasks = async (req, res) => {
 
   try {
@@ -87,16 +86,20 @@ export const updateTask = async (req, res) => {
 export const deleteTask = async (req, res) => {
    const { id } = req.params;
 
-  const [result] = await pool.query("DELETE FROM tasks WHERE id = (?)", [
-   req.params.id,
- ]);
- 
- if (result.affectedRows === 0){
- return res.status(404).json({msg: "Task not found"});
- };
+  try {
+      const [result] = await pool.query("DELETE FROM tasks WHERE id = (?)", [
+        req.params.id,
+      ]);
 
- return res.status(200).json({
-   msg: `Task nº ${id} successfully deleted`,
- });
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ msg: "Task not found" });
+      };
+
+      return res.status(200).json({
+        msg: `Task nº ${id} successfully deleted`,
+      });
+  } catch (error) {
+    return res.status(200).json({msg: error.message})
+  };
  
 };
