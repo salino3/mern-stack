@@ -1,5 +1,6 @@
 import React from "react";
-import { Task, deleteTaskRequest } from "../../api";
+import { Task } from "../../api";
+import { useTasks } from "../../context";
 
 interface Props {
   task: Task;
@@ -7,17 +8,13 @@ interface Props {
 
 export const TaskCard: React.FC<Props> = ({task}) => {
 
-    
-const handleDelete = async (task: Task) => {
-     if(task && task?.id){
- try {
-    
-    const response = await  deleteTaskRequest(task?.id);
-      console.log(response);
- } catch (error) {
-    console.error(error);   
-  }};
+   const { deleteTask } = useTasks();
+
+function handleDelete (task: Task) {
+    if(task && task?.id){
+  deleteTask(task?.id);
  };
+};
 
   return (
     <div>

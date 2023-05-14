@@ -1,21 +1,15 @@
 import React from 'react';
-import { Task, getTasksRequest } from '../api';
+import { useTasks } from '../context';
+import { Task } from '../api';
 import { TaskCard } from '../components';
 
 export const TasksPages: React.FC = () => {
 
-  const [tasks, setTasks] = React.useState<Task[] | undefined>([]);
+  const {tasks, loadTasks} = useTasks();
 
  React.useEffect(() => {
-  async function loadTasks() {
-   const response = await getTasksRequest();
-   setTasks(response.data);
-  };
-
-  return () => {
-    loadTasks();  
-    };
-  }, []);
+     loadTasks();  
+  }, [tasks?.length]);
 
 
   function renderMain() {
