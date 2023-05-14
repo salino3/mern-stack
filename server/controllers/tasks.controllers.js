@@ -22,9 +22,10 @@ export const getTask = async (req, res) => {
        req.params.id,
      ]);
 
-     if (result || result.length === 0) {
+     if (!result || result.length === 0) {
        return res.status(404).json({ msg: "Task not found" });
      };
+     
      res.json(result[0]);
   } catch (error) {
       return res.status(500).json({ msg: error.message });

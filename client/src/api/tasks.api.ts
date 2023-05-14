@@ -8,6 +8,8 @@ interface Task {
     createAt?: string;
 };
 
+const PORT = import.meta.env.VITE_APP_URL;
+
 export const  cretateTaskRequest = async (task: Task) => {
- await axios.post(`http://localhost:3100/tasks`, task);
+ await axios.post(`http://localhost:${PORT}/tasks`, task);
 };
