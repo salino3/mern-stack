@@ -1,22 +1,56 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
-import { useTasks } from "../context";
+import { Task, useTasks } from "../context";
 
 export const TasksForm: React.FC = () => {
+  const { createTask, getTask, updateTask } = useTasks();
 
- const {createTask} = useTasks();
+  const params = useParams();
+  const navigate = useNavigate();
+
+
+  const [task, setTask] = React.useState<Task>({
+    title: "",
+    description: "",
+  });
+
+  React.useEffect(() => {
+    const loadTask = async () => {
+      if (params.id) {
+        const task = await getTask(params.id);
+        setTask({
+          title: task?.title ? task.title : "",
+          description: task?.description ? task.description : "",
+        });
+      }
+    };
+
+    return () => {
+      loadTask();
+    };
+  }, []);
 
   return (
     <div>
-      <Formik
-        initialValues={{
-          title: "",
-          description: "",
-        }}
-        onSubmit={async (values, actions) => {
-      createTask(values);
-       actions.resetForm();
+      <h1>{params?.id ? "Edit Task" : "New Task"}</h1>
 
+      <Formik
+        initialValues={task}
+        enableReinitialize={true}
+        onSubmit={async (values, actions) => {
+          if (params?.id) {
+          await updateTask(params?.id, values);
+           navigate('/');
+          } else {
+           await createTask(values);
+            navigate("/");
+          };
+          setTask({
+            title: "",
+            description: "",
+          });
+          // actions.resetForm();
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
@@ -38,9 +72,9 @@ export const TasksForm: React.FC = () => {
               name="description"
               value={values.description}
             ></textarea>
-            <button 
-            disabled={isSubmitting}
-            type="submit">{isSubmitting ? "Saving.." : "Save"}</button>
+            <button disabled={isSubmitting} type="submit">
+              {isSubmitting ? "Saving.." : "Save"}
+            </button>
           </Form>
         )}
       </Formik>
