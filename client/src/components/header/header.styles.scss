@@ -1,0 +1,27 @@
+header {
+
+        width: 100%;
+        
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    ul {
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+        
+     a {
+         color: white;
+      }
+     }
+    }
+
+    hr {
+        width: 95%;
+        margin-bottom: 30px;
+
+    }
+
+}

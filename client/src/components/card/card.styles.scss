@@ -1,0 +1,78 @@
+
+.container {
+    max-width: 450px;
+    border: solid rgba(130, 2, 68, 0.801);
+    padding: 5px;
+    margin: 10px;
+    border-radius: 20px;
+    border-style: outset;
+    font-weight: 700;
+
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        font-size: large;
+
+    }
+
+    .box-articles{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: auto;    
+        gap: 5px;   
+        
+
+        span {
+            display: flex;
+            flex-direction: row;
+
+            & :first-child {
+                width: 50px;
+            }
+            
+            article {
+                display: inline-block;
+                max-width: min-content;
+                white-space: nowrap;
+     
+                background: rgba(255, 255, 255, 0.4);
+                padding: 1px 10px; 
+            }
+        }
+    } 
+
+    .box-btn {
+        display: flex;
+        gap: 10px;
+
+        margin: 10px 0px 10px 0px;
+       
+        button {
+             font-family: fantasy;
+             font-size: large;
+             color: aliceblue;
+             border-radius: 15px;
+             padding: 7px;
+             cursor: pointer;
+        }
+
+        .btnDelete{
+            background-color: red;
+        }
+
+        .btnRedirect {
+            background-color: black;
+        }
+
+        .btnDone {
+            background-color: blueviolet;
+        }
+
+    }
+}
+
+
+
