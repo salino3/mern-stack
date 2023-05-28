@@ -1,0 +1,10 @@
+.box-list {
+    display: grid;
+    
+    gap: 10px;
+    grid-template-columns: minmax(500px, auto-fill);
+    grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+    grid-template-rows: auto;
+    
+
+}

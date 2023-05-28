@@ -1,3 +1,4 @@
 export * from "./header";
-export * from "./task-card";
+export * from "./task-list";
+export * from "./card";
 
