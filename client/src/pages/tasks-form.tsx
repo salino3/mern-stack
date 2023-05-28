@@ -32,7 +32,7 @@ export const TasksForm: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="root">
       <h1>{params?.id ? "Edit Task" : "New Task"}</h1>
 
       <Formik
@@ -54,7 +54,7 @@ export const TasksForm: React.FC = () => {
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form className="myForm" onSubmit={handleSubmit}>
             <label htmlFor="title">Title</label>
             <input
               onChange={handleChange}
@@ -63,15 +63,17 @@ export const TasksForm: React.FC = () => {
               name="title"
               value={values.title}
               required
-            />{" "}
+            />
+            <br />
             <label htmlFor="description">Description</label>
             <textarea
               onChange={handleChange}
               placeholder="Text a Description"
-              rows={3}
+              rows={4}
               name="description"
               value={values.description}
             ></textarea>
+            <br />
             <button disabled={isSubmitting} type="submit">
               {isSubmitting ? "Saving.." : "Save"}
             </button>

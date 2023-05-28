@@ -1,0 +1,21 @@
+body {
+   display: flex;
+   flex-direction: column;
+
+    background-image: url('/assets/gallery/Titanium-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    margin: auto;
+    padding: 0px 10px;
+    width: 100%;
+    height: 100%;
+
+
+      &::-webkit-scrollbar {
+    display: none;
+   }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+}
